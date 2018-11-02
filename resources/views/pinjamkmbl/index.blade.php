@@ -185,6 +185,7 @@
           state = "update";
 
           $('#id').val(data.id);
+          $('#Nopjkb').val(data.Nopjkb);
           $('#id_jb').val(data.id_jb);
           $('#id_agt').val(data.id_agt);
           $('#id_buku').val(data.id_buku);

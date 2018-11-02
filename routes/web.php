@@ -44,6 +44,7 @@ Route::post('storepinjam','PinjamkmblController@store');
 Route::get('editpinjam/{id}','PinjamkmblController@edit');
 Route::post('updatepinjam/{id}','PinjamkmblController@update');
 
+Route::get('myform/kbl/{id}',array('as'=>'myform.ajax','uses'=>'PinjamkmblController@getdataedit'));
 Route::get('pengembalian','PinjamkmblController@index2')->name('pengembalian');
 
 Auth::routes();

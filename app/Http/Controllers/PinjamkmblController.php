@@ -34,6 +34,17 @@ class PinjamkmblController extends Controller
             })
         ->rawColumns(['Anggota','Buku','action'])->make(true);
     }
+
+    public function getdataedit($id)
+    {
+        $pinjam = Pinjamkmbl::find($id);
+        $data['anggota']=$pinjam->anggota->Namaagt;
+        $data['judulbuku']=$pinjam->bukupjkb->Judul;
+        $data['tanggalpjm']=$pinjam->Tglpjm;
+        $data['tanggalharuskbl']=$pinjam->Tglharuskbl;
+        return json_encode($data);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,10 +59,10 @@ class PinjamkmblController extends Controller
     }
     public function index2()
     {
-        $pinjam = Pinjamkmbl::where('Tglkbl','=',null)->get();
-        $anggota = Anggota::all();
-        $buku = Buku::all();
-        return view('pinjamkmbl.indexkedua', compact('pinjam','anggota','buku'));
+        $kbl = Pinjamkmbl::where('Tglkbl','=',null)->get();
+        $anggotakbl = Anggota::all();
+        $bukukbl = Buku::all();
+        return view('pinjamkmbl.indexkedua', compact('kbl','anggotakbl','bukukbl'));
     }
 
     /**
@@ -97,7 +108,6 @@ class PinjamkmblController extends Controller
         $data->Tglpjm = $request->Tglpjm;
 
         $data->Tglharuskbl = $tgl;
-        $data->Denda = $request->Denda;
         $data->save();
 
         $sedia = Buku::where('id', $data->id_buku)->first();
@@ -125,7 +135,8 @@ class PinjamkmblController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pinjam = Pinjamkmbl::findOrFail($id);
+        return $pinjam;
     }
 
     /**
@@ -136,6 +147,11 @@ class PinjamkmblController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+    {
+        //
+    }
+
+    public function updatekbl(Request $request, $id)
     {
         //
     }
